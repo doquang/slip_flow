@@ -8,10 +8,12 @@
 ###############################################################################
 # Use the MOOSE submodule if it exists and MOOSE_DIR is not set
 MOOSE_SUBMODULE    := $(CURDIR)/moose
-ifneq ($(wildcard $(MOOSE_SUBMODULE)/framework/Makefile),)
-  MOOSE_DIR        ?= $(MOOSE_SUBMODULE)
-else
-  MOOSE_DIR        ?= $(shell dirname `pwd`)/moose
+ifndef ${MOOSE_DIR}
+  ifneq ($(wildcard $(MOOSE_SUBMODULE)/framework/Makefile),)
+    MOOSE_DIR        ?= $(MOOSE_SUBMODULE)
+  else
+    MOOSE_DIR        ?= $(shell dirname `pwd`)/moose
+  endif
 endif
 
 # framework
@@ -34,10 +36,10 @@ FLUID_PROPERTIES            := no
 FSI                         := no
 FUNCTIONAL_EXPANSION_TOOLS  := no
 GEOCHEMISTRY                := no
-HEAT_TRANSFER               := no
+HEAT_TRANSFER               := yes
 LEVEL_SET                   := no
 MISC                        := no
-NAVIER_STOKES               := no
+NAVIER_STOKES               := yes
 OPTIMIZATION                := no
 PERIDYNAMICS                := no
 PHASE_FIELD                 := no
